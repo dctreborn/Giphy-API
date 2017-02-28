@@ -34,6 +34,21 @@ function displayTopic(entry) {
 	}
 }
 
+//animates image
+$(document.body).on("click", "img", function(){
+	var state = $(this).attr("state");
+
+	if (state == "still") {
+		$(this).attr("state","animate");
+		$(this).attr("src",$(this).attr("data-animated"));
+	}
+	else {
+		$(this).attr("state","stille");
+		$(this).attr("src",$(this).attr("data-still"));
+	}
+
+})
+
 //search button item
 $(document.body).on("click", ".search", function(){
 	$("#list").empty();
