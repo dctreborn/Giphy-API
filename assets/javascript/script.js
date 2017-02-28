@@ -12,18 +12,32 @@ $("#add").on("click", function(event) {
 	var entry = $("#tag-input").val().trim();
 	if (entry == ""){} //do nothing
 	else {
-		var btn = $("<button>");
-		topics.push(entry);
-		btn.attr("data-search",entry);
-		btn.addClass("search");
-		btn.text(entry);
-		$("#buttons").append(btn);
+		displayTopic(entry);
 	}
 });
 
+function displayTopic(entry) {
+	entry = entry || ""; //set entry to be optional argument
+	if (entry == ""){} //do nothing if entry is empty string
+	else {
+		topics.push(entry);
+	}
+	var length = topics.length
+	$("#buttons").empty();
+
+	for (var i = 0; i < length; i++) {
+		var btn = $("<button>");
+		btn.attr("data-search", topics[i]);
+		btn.addClass("search");
+		btn.text(topics[i]);
+		$("#buttons").append(btn);		
+	}
+}
+
 //search button item
 $(document.body).on("click", ".search", function(){
-	console.log("searching...");
+	$("#list").empty();
+
 	var target = $(this).attr("data-search").replace(/\s/,"+");
 	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + target + "&limit=10&api_key=dc6zaTOxFJmzC";
 
@@ -31,13 +45,14 @@ $(document.body).on("click", ".search", function(){
 		url: queryURL,
 		method: "GET"
 	}).done(function(response){
-		console.log(response);
+
 		response = response.data;
 		var length = response.length;
-		console.log(length);
+		
+		var imageList = $("<ul>")
 
 		for (var i = 0; i < length; i++) {
-			console.log("loop " + i);
+			var list = $("<li>");
 			var div = $("<div>");
 			var img = $("<img>");
 			var p = $("<p>");
@@ -46,9 +61,10 @@ $(document.body).on("click", ".search", function(){
 			img.attr("state","still");
 			img.attr("data-still", response[i].images.original_still.url);
 			img.attr("data-animated", response[i].images.original.url);
-			div.append(p);
 			div.append(img);
-			$("#images").append(div);
+			div.append(p);
+			list.append(div);
+			$("#list").append(list);
 		}
 
 
@@ -56,3 +72,5 @@ $(document.body).on("click", ".search", function(){
 	  throw err;
 	});
 });
+
+displayTopic();
