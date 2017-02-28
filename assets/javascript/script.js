@@ -43,7 +43,7 @@ $(document.body).on("click", "img", function(){
 		$(this).attr("src",$(this).attr("data-animated"));
 	}
 	else {
-		$(this).attr("state","stille");
+		$(this).attr("state","still");
 		$(this).attr("src",$(this).attr("data-still"));
 	}
 
@@ -70,6 +70,7 @@ $(document.body).on("click", ".search", function(){
 			var list = $("<li>");
 			var div = $("<div>");
 			var img = $("<img>");
+			var span = $("<span>");
 			var p = $("<p>");
 			p.text("Rating: " + response[i].rating.toUpperCase());
 			img.attr("src", response[i].images.original_still.url);
@@ -80,6 +81,7 @@ $(document.body).on("click", ".search", function(){
 			div.append(p);
 			list.append(div);
 			$("#list").append(list);
+			//to add overlay image of play button. prepend? append?
 		}
 
 

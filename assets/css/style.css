@@ -9,4 +9,16 @@ li {
 
 img {
 	width: 200px;
+	height: auto;
 }
+
+/*
+div img {
+	position: relative;
+}
+
+.overlay {
+	position: absolute;
+	opacity: 0.5;
+	z-index: 10;
+}*/
