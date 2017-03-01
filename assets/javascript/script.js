@@ -13,8 +13,25 @@ $("#add").on("click", function(event) {
 	if (entry == ""){} //do nothing
 	else {
 		displayTopic(entry);
+		$("#tag-input").val("");
 	}
 });
+
+$("#tag-input").on("keypress", function(event) {
+	
+	if (!event) {event = window.event};
+
+	//keycode 13 == enter key
+	if (event.keyCode == "13") {
+		var entry = $("#tag-input").val().trim();
+		if (entry == ""){} //do nothing
+		else {
+			displayTopic(entry);
+			$("#tag-input").val("");
+		}
+	}
+});
+
 
 function displayTopic(entry) {
 	entry = entry || ""; //set entry to be optional argument
