@@ -58,10 +58,12 @@ $(document.body).on("click", "img", function(){
 	if (state == "still") {
 		$(this).attr("state","animate");
 		$(this).attr("src",$(this).attr("data-animated"));
+		$(this).parent().children("#play").css("display","none");
 	}
 	else {
 		$(this).attr("state","still");
 		$(this).attr("src",$(this).attr("data-still"));
+		$(this).parent().children("#play").css("display","initial");
 	}
 
 })
@@ -89,12 +91,14 @@ $(document.body).on("click", ".search", function(){
 			var img = $("<img>");
 			var span = $("<span>");
 			var p = $("<p>");
+			div.attr("id","image-holder");
 			p.text("Rating: " + response[i].rating.toUpperCase());
 			img.attr("src", response[i].images.original_still.url);
 			img.attr("state","still");
 			img.attr("data-still", response[i].images.original_still.url);
 			img.attr("data-animated", response[i].images.original.url);
 			div.append(img);
+			div.append("<img src=\"assets/images/play.png\" id=\"play\">");
 			div.append(p);
 			list.append(div);
 			$("#list").append(list);
