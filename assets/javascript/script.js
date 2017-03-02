@@ -1,5 +1,5 @@
 var topics; // holds searches
-topics = ["rabbit","shoebill","lion"];
+topics = ["rabbit","shoebill","lion","sunfish","turtle","space","galaxy","sun","planets","cooking"];
 //theme: animals
 //10 static images per search
 //images should animate on click
