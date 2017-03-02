@@ -51,22 +51,45 @@ function displayTopic(entry) {
 	}
 }
 
-//animates image
+function animate(img) {
+	$(img).attr("state","animate");
+	$(img).attr("src",$(img).attr("data-animated"));
+	$(img).parent().children("#play").css("display","none");
+}
+
+function pause(img) {
+	$(img).attr("state","still");
+	$(img).attr("src",$(img).attr("data-still"));
+	$(img).parent().children("#play").css("display","initial");
+}
+
+//animates image on click
 $(document.body).on("click", "img", function(){
-	var state = $(this).attr("state");
+	var img = $(this);
+	var state = img.attr("state");
 
 	if (state == "still") {
-		$(this).attr("state","animate");
-		$(this).attr("src",$(this).attr("data-animated"));
-		$(this).parent().children("#play").css("display","none");
+		animate(img);
 	}
 	else {
-		$(this).attr("state","still");
-		$(this).attr("src",$(this).attr("data-still"));
-		$(this).parent().children("#play").css("display","initial");
+		pause(img);
 	}
 
-})
+});
+
+//animates on hover
+$(document.body).on("mouseenter mouseleave", "img", function(){
+	var img = $(this);
+	var state = img.attr("state");
+
+	if (state == "still") {
+		animate(img);
+	}
+	else {
+		pause(img);
+	}
+
+});
 
 //search button item
 $(document.body).on("click", ".search", function(){
