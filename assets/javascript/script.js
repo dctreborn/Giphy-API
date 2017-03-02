@@ -96,7 +96,7 @@ $(document.body).on("click", ".search", function(){
 	$("#list").empty();
 
 	var target = $(this).attr("data-search").replace(/\s/,"+");
-	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + target + "&limit=10&api_key=dc6zaTOxFJmzC";
+	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + target + "&limit=10&api_key=dc6zaTOxFJmzC";
 
 	$.ajax({
 		url: queryURL,
