@@ -35,7 +35,11 @@ $("#tag-input").on("keypress", function(event) {
 
 function displayTopic(entry) {
 	entry = entry || ""; //set entry to be optional argument
-	if (entry == ""){} //do nothing if entry is empty string
+	if (entry == "" || topics.includes(entry)){//do nothing if entry is empty string or is in array already	
+		if (topics.includes(entry)) {
+			alert("Entry already exists.");
+		}
+	} 
 	else {
 		topics.push(entry);
 	}
@@ -96,7 +100,7 @@ $(document.body).on("click", ".search", function(){
 	$("#list").empty();
 
 	var target = $(this).attr("data-search").replace(/\s/,"+");
-	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + target + "&limit=10&api_key=dc6zaTOxFJmzC";
+	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + target + "&limit=10&api_key=dc6zaTOxFJmzC";
 
 	$.ajax({
 		url: queryURL,
